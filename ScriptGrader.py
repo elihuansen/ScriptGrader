@@ -74,13 +74,17 @@ class Grader:
         output = script.run()
         similarity = self._get_similarity(output, testcase.expected)
 
+        passed = similarity >= self.correct_threshold
+
         if VERBOSE:
-            color = 'green' if similarity >= self.correct_threshold else 'red'
-            colored_text = colored(similarity, color, attrs=["bold"])
+            color = 'green' if passed else 'red'
+
+            pct_similarity = format(similarity, '.2%')
+            colored_text = colored(pct_similarity, color, attrs=["bold"])
 
             print(f'Script output vs Expected output: {colored_text}')
 
-        return similarity >= self.correct_threshold
+        return passed
 
     def _get_similarity(self, output, testcase):
         return SequenceMatcher(None, output, testcase).ratio()  
