@@ -1,0 +1,7 @@
+P = int(input('Initial Deposit:'))
+r = float(input('Annual Interest Rate (in %):'))
+n = int(input('Annual Compound Frequency (1 - 12):'))
+t = int(input('Num years:'))
+A = P * ((1 + r / n / 100) ** (n * t))
+result = format(A, '.2f')
+print('Amount after',str(float(t)),'years is',str(result))
